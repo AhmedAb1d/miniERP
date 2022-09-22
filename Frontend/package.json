@@ -12,6 +12,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "concurrently": "^7.4.0",
     "material-ui-search-bar": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,10 +21,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=4200 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently -n client,server -c cyan,green \"set PORT=4200 && react-scripts start\" \"cd ../Backend && nodemon server\""
   },
   "eslintConfig": {
     "extends": [

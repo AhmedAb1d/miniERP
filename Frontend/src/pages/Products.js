@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -21,6 +22,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ProductCard from "../components/ProductCard";
 import Grid from '@mui/material/Grid';
+import FormDialog from '../components/FormDialog';
 
 const drawerWidth = 240;
 
@@ -90,6 +92,23 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
+
+  const [cards,setCards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/products')
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw res;
+    })
+    .then(data => {
+      setCards(data);
+    })
+    .catch(err => console.error(err));
+  },[]);
+
   const navigate = useNavigate();
 
   const theme = useTheme();
@@ -168,19 +187,19 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+        <FormDialog/>
         <Grid container spacing={2}>
-          <Grid item xs={2} md={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={2} md={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={2} md={3}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={2} md={3}>
-            <ProductCard />
-          </Grid>
+          {cards.map(card => (
+            <Grid item key={card._id} xs={2} md={3}>
+              <ProductCard 
+                id={card._id}
+                title={card.title} 
+                date={card.date}
+                price={card.price} 
+                quantity={card.quantity}
+                />
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>

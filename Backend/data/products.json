@@ -1,0 +1,11 @@
+[
+  { id: 1, title: "Snow", price: "14", quantity: 35 },
+  { id: 2, title: "Lannister", price: "23", quantity: 42 },
+  { id: 3, title: "Lannister", price: "11", quantity: 45 },
+  { id: 4, title: "Stark", price: "22", quantity: 16 },
+  { id: 5, title: "Targaryen", price: "24", quantity: null },
+  { id: 6, title: "Melisandre", price: "22", quantity: 150 },
+  { id: 7, title: "Clifford", price: "12", quantity: 44 },
+  { id: 8, title: "Frances", price: "14", quantity: 36 },
+  { id: 9, title: "Roxie", price: "54", quantity: 65 },
+]  
